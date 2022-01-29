@@ -1,2 +1,2 @@
 # Midnite-Evaluation-Test
-Midnite evaluation project repository
+Evaluation project for Midnite.
