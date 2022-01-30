@@ -6,12 +6,14 @@ public class SandwichGameGridSection
     public readonly List<SandwichIngredientIstance> ingredientsStack;
     public readonly Vector3 sectionPosition;
     public readonly Vector2Int sectionIndex;
+    private SandwichGameGrid grid;
 
     public bool IsEmpty { get { return ingredientsStack.Count == 0; } }
     public bool IsCompleted { get { return ingredientsStack.Count > 0 && ingredientsStack[0].isBread && ingredientsStack[ingredientsStack.Count -1].isBread; } }
 
-    public SandwichGameGridSection(Vector2Int sectionIndex, Vector3 sectionPosition)
+    public SandwichGameGridSection(SandwichGameGrid grid, Vector2Int sectionIndex, Vector3 sectionPosition)
     {
+        this.grid = grid;
         ingredientsStack = new List<SandwichIngredientIstance>();
         this.sectionPosition = sectionPosition;
         this.sectionIndex = sectionIndex;
@@ -19,15 +21,15 @@ public class SandwichGameGridSection
 
     public void InitWithIngredient(SandwichIngredientData ingredientData, bool isBread)
     {
-        foreach (var ingredient in ingredientsStack)
+        /*foreach (var ingredient in ingredientsStack)
         {
             GameObject.Destroy(ingredient.gameObject);
-        }
+        }*/
         ingredientsStack.Clear();
 
         if (ingredientData != null)
         {
-            GameObject ingedientIstanceObj = GameObject.Instantiate(ingredientData.ingredientObject);
+            GameObject ingedientIstanceObj = GameObject.Instantiate(ingredientData.ingredientObject, grid.elementsRoot);
             SandwichIngredientIstance ingredientIstance = InitIngredientIstanceObject(ingredientData, ingedientIstanceObj);
             ingredientIstance.isBread = isBread;
             ingredientsStack.Add(ingredientIstance);            

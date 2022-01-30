@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47410bb05923f7b4da301f6253e6f1c7, type: 3}
-  m_Name: ResetEvent
+  m_Name: LevelWonEvent
   m_EditorClassIdentifier: 

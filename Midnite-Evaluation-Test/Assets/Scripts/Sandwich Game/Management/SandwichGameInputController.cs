@@ -1,41 +1,28 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SandwichLevelManager : MonoBehaviour
+public class SandwichGameInputController : MonoBehaviour
 {
-    public SandwichData ingredientsData;
-    public SandwichLevelGenerator levelGenerator;
-    public int gridSize = 4;
+    public SandwichGameLevelManager levelManager;
 
-    [Space()]
-    public float ingredientsVerticalOffset = 0.2f;
     public float timeBetweenMoves = 1.0f;
+
+    private SandwichGameGridSection currentTouchedSection;
+
+    private bool readingInputs;
+    private float inputTimeout;
+    private bool inputBlocked;
 
 #if UNITY_EDITOR
     [Space()]
     public bool printDebug;
 #endif
 
-    private SandwichGameGrid gameGrid;
-    private SandwichGameGridSection currentTouchedSection;
-    private SandwichLevelData levelData;
-
-    private bool readingInputs;
-    private float inputTimeout;
-
-    private void Start()
+    void Start()
     {
-        if (levelGenerator != null)
-        {
-            levelData = levelGenerator.GenerateLevelData(ingredientsData);
-        }
-
-        gameGrid = new SandwichGameGrid(gridSize, ingredientsVerticalOffset);
-        gameGrid.InitWithData(levelData);
-
         readingInputs = true;
     }
 
-    private void Update()
+    void Update()
     {
         if (inputTimeout > 0)
         {
@@ -48,18 +35,14 @@ public class SandwichLevelManager : MonoBehaviour
         }
     }
 
-    public void RestartLevel()
+    public void SetInputBlocked(bool blocked)
     {
-        readingInputs = false;
-
-        gameGrid.InitWithData(levelData);
-
-        readingInputs = true;
+        inputBlocked = blocked;
     }
 
     public void OnTouchEvent(Vector2 data)
     {
-        if (readingInputs)
+        if (readingInputs && !inputBlocked)
         {
             currentTouchedSection = GetPointedSection(data);
 
@@ -84,11 +67,11 @@ public class SandwichLevelManager : MonoBehaviour
 
     public void OnSwipeEvent(Vector2 data)
     {
-        if (readingInputs)
+        if (readingInputs && !inputBlocked)
         {
             Vector2Int fromIndex = currentTouchedSection.sectionIndex;
             Vector2Int toIndex = new Vector2Int(fromIndex.x + (int)data.x, fromIndex.y + (int)data.y);
-            gameGrid.TransferIngredients(fromIndex, toIndex);
+            levelManager.MakeMove(fromIndex, toIndex);
 
             inputTimeout = timeBetweenMoves;
             readingInputs = false;

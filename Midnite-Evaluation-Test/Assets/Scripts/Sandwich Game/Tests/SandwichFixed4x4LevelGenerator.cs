@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SandwichFixed4x4LevelGenerator : SandwichLevelGenerator
+public class SandwichFixed4x4LevelGenerator : SandwichGameLevelGenerator
 {
     [Space()]
     public string ingredientAt_0_0;

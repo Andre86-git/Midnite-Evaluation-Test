@@ -5,21 +5,23 @@ public class SandwichGameGrid
 {
     private SandwichGameGridSection[,] gridSections;
     private int size;
-    float vOffset;
+    private float vOffset;
+    public readonly Transform elementsRoot;
 
-    public SandwichGameGrid(int size, float vOffset)
+    public SandwichGameGrid(int size, float vOffset, Transform elementsRoot)
     {
         gridSections = new SandwichGameGridSection[size, size];
         for (int i=0; i<size; i++)
         {
             for (int j=0; j<size; j++)
             {
-                gridSections[i, j] = new SandwichGameGridSection(new Vector2Int(i, j), new Vector3(i + 0.5f, 0, j + 0.5f));
+                gridSections[i, j] = new SandwichGameGridSection(this, new Vector2Int(i, j), new Vector3(i + 0.5f, 0, j + 0.5f));
             }
         }
 
         this.size = size;
         this.vOffset = vOffset;
+        this.elementsRoot = elementsRoot;
     }
 
     public void InitWithData(SandwichLevelData levelData)
@@ -36,21 +38,6 @@ public class SandwichGameGrid
                 }
             }
         }
-    }
-
-    public List<SandwichIngredientIstance> GetIngredientsAt(int x, int y)
-    {
-        List<SandwichIngredientIstance> result = null;
-        if (x >= 0 && x < size && y >= 0 && y < size)
-        {
-            if (!gridSections[x,y].IsEmpty)
-            {
-                result = new List<SandwichIngredientIstance>();
-                result.AddRange(gridSections[x, y].ingredientsStack);
-            }
-        }
-
-        return result;
     }
 
     public bool TransferIngredients(Vector2Int from, Vector2Int to)
@@ -73,5 +60,18 @@ public class SandwichGameGrid
         }
 
         return false;
+    }
+
+    public bool CheckGridCompleted()
+    {
+        foreach (var section in gridSections)
+        {
+            if (!section.IsEmpty && !section.IsCompleted)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
