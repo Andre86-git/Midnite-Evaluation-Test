@@ -22,7 +22,7 @@ public class SandwichGameLevelManager : MonoBehaviour
     private SandwichGameGridSection currentTouchedSection;
     private SandwichLevelData levelData;
 
-    private bool gameEnd;
+    private bool levelEnded;
 
     private void Start()
     {
@@ -33,21 +33,17 @@ public class SandwichGameLevelManager : MonoBehaviour
     {
         SetInputBlocked(true);
 
-        if (elementsRoot!= null)
-        {
-            for (int i=0;i<elementsRoot.childCount;i++)
-            {
-                GameObject.Destroy(elementsRoot.GetChild(i).gameObject);
-            }
-        }
+        ClearLevel();
 
         if (levelGenerator != null)
         {
-            levelData = levelGenerator.GenerateLevelData(ingredientsData);
+            levelData = levelGenerator.GenerateLevelData(ingredientsData, gridSize);
         }
 
         gameGrid = new SandwichGameGrid(gridSize, ingredientsVerticalOffset, elementsRoot);
         gameGrid.InitWithData(levelData);
+
+        levelEnded = false;
 
         levelStartedEvent.Raise();
 
@@ -56,16 +52,37 @@ public class SandwichGameLevelManager : MonoBehaviour
 
     public void RestartLevel()
     {
-        if (gameEnd)
+        if (levelEnded)
         {
             return;
         }
 
         SetInputBlocked(true);
 
+        ClearLevel();
+
         gameGrid.InitWithData(levelData);
 
         SetInputBlocked(false);
+    }
+
+    private void ClearLevel()
+    {
+        if (elementsRoot != null)
+        {
+            for (int i = 0; i < elementsRoot.childCount; i++)
+            {
+                GameObject.Destroy(elementsRoot.GetChild(i).gameObject);
+            }
+        }
+        else
+        {
+            SandwichIngredientIstance[] toDestroyObjs = GameObject.FindObjectsOfType<SandwichIngredientIstance>();
+            for (int i=0; i< toDestroyObjs.Length; i++)
+            {
+                GameObject.Destroy(toDestroyObjs[i].gameObject);
+            }
+        }
     }
 
     public void MakeMove(Vector2Int fromIndex, Vector2Int toIndex)
@@ -75,7 +92,7 @@ public class SandwichGameLevelManager : MonoBehaviour
         if (gameGrid.CheckGridCompleted())
         {
             SetInputBlocked(true);
-            gameEnd = true;
+            levelEnded = true;
 
             levelWonEvent.Raise();
         }

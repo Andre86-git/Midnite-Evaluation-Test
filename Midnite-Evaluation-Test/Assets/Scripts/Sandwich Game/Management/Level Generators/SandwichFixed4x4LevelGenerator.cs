@@ -22,7 +22,7 @@ public class SandwichFixed4x4LevelGenerator : SandwichGameLevelGenerator
     public string ingredientAt_2_3;
     public string ingredientAt_3_3;
 
-    public override SandwichLevelData GenerateLevelData(SandwichData sandwichData)
+    public override SandwichLevelData GenerateLevelData(SandwichData sandwichData, int gridSize)
     {
         SandwichIngredientData[,] ingredientsGridData = new SandwichIngredientData[4, 4];
         ingredientsGridData[0, 0] = GetIngredient(sandwichData, ingredientAt_0_0);

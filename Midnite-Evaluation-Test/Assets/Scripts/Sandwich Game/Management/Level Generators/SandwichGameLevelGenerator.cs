@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class SandwichGameLevelGenerator : MonoBehaviour
 {
-    public virtual SandwichLevelData GenerateLevelData(SandwichData sandwichData)
+    public virtual SandwichLevelData GenerateLevelData(SandwichData sandwichData, int gridSize)
     {
         return null;
     }

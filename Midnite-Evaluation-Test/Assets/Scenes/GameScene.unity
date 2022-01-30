@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 101184523}
   - component: {fileID: 101184522}
   m_Layer: 5
-  m_Name: NewButton
+  m_Name: NewLevelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -416,6 +416,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &232266854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 232266855}
+  m_Layer: 0
+  m_Name: LevelGenerators
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &232266855
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232266854}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1893524012}
+  - {fileID: 1295779709}
+  m_Father: {fileID: 1666748419}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &284099630
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,7 +764,7 @@ GameObject:
   - component: {fileID: 1275469917}
   - component: {fileID: 1275469916}
   m_Layer: 5
-  m_Name: ResetButton
+  m_Name: ResetLevelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -908,6 +940,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!1 &1295779708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1295779709}
+  - component: {fileID: 1295779710}
+  m_Layer: 0
+  m_Name: RandomLevelGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1295779709
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295779708}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 232266855}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1295779710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295779708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8fd05292a8ad144b8a72f2daa3eb72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minAdditiveIngredients: 2
+  maxAdditiveIngredients: 3
 --- !u!1 &1381145786
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,7 +1044,7 @@ GameObject:
   - component: {fileID: 1484492988}
   - component: {fileID: 1484492987}
   m_Layer: 5
-  m_Name: Text
+  m_Name: CompletedLevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1059,7 +1136,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Level Won
+          m_StringArgument: Level Completed
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1484492988
@@ -1246,7 +1323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1523115458}
   m_Layer: 0
-  m_Name: Ingrdients
+  m_Name: Ingredients
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1296,7 +1373,7 @@ Transform:
   - {fileID: 1992482144}
   - {fileID: 1498084421}
   - {fileID: 741619538}
-  - {fileID: 1893524012}
+  - {fileID: 232266855}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1435,8 +1512,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1666748419}
-  m_RootOrder: 3
+  m_Father: {fileID: 232266855}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1942092945
 GameObject:
@@ -1577,7 +1654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientsData: {fileID: 11400000, guid: 68674e0ef419fa24e99204ae33af011f, type: 2}
-  levelGenerator: {fileID: 1893524011}
+  levelGenerator: {fileID: 1295779710}
   gridSize: 4
   ingredientsVerticalOffset: 0.07
   inputController: {fileID: 1992482142}
