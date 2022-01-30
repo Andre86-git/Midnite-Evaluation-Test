@@ -48,21 +48,20 @@ public class SandwichLevelManager : MonoBehaviour
         }
     }
 
+    public void RestartLevel()
+    {
+        readingInputs = false;
+
+        gameGrid.InitWithData(levelData);
+
+        readingInputs = true;
+    }
+
     public void OnTouchEvent(Vector2 data)
     {
         if (readingInputs)
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(data);
-            //if (Physics.Raycast(ray, out hit, 100f))
-            if (Physics.SphereCast(ray, 0.1f, out hit, 100f))
-            {
-                SandwichIngredientIstance ingredientInstance = hit.transform.GetComponent<SandwichIngredientIstance>();
-                if (ingredientInstance != null)
-                {
-                    currentTouchedSection = ingredientInstance.currentSection;
-                }
-            }
+            currentTouchedSection = GetPointedSection(data);
 
 #if UNITY_EDITOR
             if (printDebug)
@@ -101,5 +100,22 @@ public class SandwichLevelManager : MonoBehaviour
             }
 #endif
         }
+    }
+
+    private SandwichGameGridSection GetPointedSection(Vector2 screenSpacePoint)
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(screenSpacePoint);
+        //if (Physics.Raycast(ray, out hit, 100f))
+        if (Physics.SphereCast(ray, 0.4f, out hit, 100f))
+        {
+            SandwichIngredientIstance ingredientInstance = hit.transform.GetComponent<SandwichIngredientIstance>();
+            if (ingredientInstance != null)
+            {
+                return ingredientInstance.currentSection;
+            }
+        }
+
+        return null;
     }
 }
