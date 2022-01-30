@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "NewSandwichData", menuName = "Sandwich Game/SandwichData", order = 1)]
 public class SandwichData : ScriptableObject
 {
     public SandwichIngredientData breadIngredient;

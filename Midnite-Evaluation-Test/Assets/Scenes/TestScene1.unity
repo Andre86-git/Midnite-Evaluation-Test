@@ -247,8 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4917e8a5a05727b4ba340589a6040143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchEvent: {fileID: 11400000, guid: c421499c964fec945a18627e606eac43, type: 2}
-  swipeEvent: {fileID: 11400000, guid: b8e493084295f17488b0e4fe13db374e, type: 2}
+  touchEvent: {fileID: 11400000, guid: 3b2962b0d1a1f5042b6ecbc82aa66b1d, type: 2}
+  swipeEvent: {fileID: 11400000, guid: b3a0bc375075ecf49bb4f011effeebc9, type: 2}
 --- !u!1 &1498084420
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,8 +258,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1498084421}
-  - component: {fileID: 1498084422}
   - component: {fileID: 1498084423}
+  - component: {fileID: 1498084422}
   m_Layer: 0
   m_Name: EventsListener
   m_TagString: Untagged
@@ -290,16 +290,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1498084420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a312469c8f874fd41808f1bf170fc6fd, type: 3}
+  m_Script: {fileID: 11500000, guid: d834c3634a8596c4ebe898a382b01334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: c421499c964fec945a18627e606eac43, type: 2}
+  gameEvent: {fileID: 11400000, guid: b3a0bc375075ecf49bb4f011effeebc9, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1992482143}
         m_TargetAssemblyTypeName: SandwichLevelManager, Assembly-CSharp
-        m_MethodName: OnTouchEvent
+        m_MethodName: OnSwipeEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -318,16 +318,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1498084420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a312469c8f874fd41808f1bf170fc6fd, type: 3}
+  m_Script: {fileID: 11500000, guid: d834c3634a8596c4ebe898a382b01334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: b8e493084295f17488b0e4fe13db374e, type: 2}
+  gameEvent: {fileID: 11400000, guid: 3b2962b0d1a1f5042b6ecbc82aa66b1d, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1992482143}
         m_TargetAssemblyTypeName: SandwichLevelManager, Assembly-CSharp
-        m_MethodName: OnSwipeEvent
+        m_MethodName: OnTouchEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

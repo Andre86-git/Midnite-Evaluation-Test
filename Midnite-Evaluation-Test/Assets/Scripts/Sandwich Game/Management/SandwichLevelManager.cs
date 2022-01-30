@@ -54,7 +54,8 @@ public class SandwichLevelManager : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(data);
-            if (Physics.Raycast(ray, out hit, 100f))
+            //if (Physics.Raycast(ray, out hit, 100f))
+            if (Physics.SphereCast(ray, 0.1f, out hit, 100f))
             {
                 SandwichIngredientIstance ingredientInstance = hit.transform.GetComponent<SandwichIngredientIstance>();
                 if (ingredientInstance != null)

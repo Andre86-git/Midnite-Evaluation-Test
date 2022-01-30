@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public GameEvent touchEvent;
-    public GameEvent swipeEvent;
+    public GameVector2Event touchEvent;
+    public GameVector2Event swipeEvent;
 
     private Touch touch;
     private Vector2 touchStartPosition;

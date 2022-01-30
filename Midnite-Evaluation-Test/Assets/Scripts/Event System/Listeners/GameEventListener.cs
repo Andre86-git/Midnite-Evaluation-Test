@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public abstract class GameEventListener : MonoBehaviour
+public class GameEventListener : MonoBehaviour
 {
     public GameEvent gameEvent;
+    public UnityEvent response;
 
     public void OnEnable()
     {
@@ -22,13 +24,9 @@ public abstract class GameEventListener : MonoBehaviour
 
     public virtual void OnEventRaise()
     {
-    }
-
-    public virtual void OnEventRaise(Vector2 data)
-    {
-    }
-
-    public virtual void OnEventRaise(Vector3 data)
-    {
+        if (response != null)
+        {
+            response.Invoke();
+        }
     }
 }

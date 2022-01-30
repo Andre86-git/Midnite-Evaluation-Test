@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "NewGameEvent", menuName = "Game Events/GameEvent", order = 1)]
 public class GameEvent : ScriptableObject
 {
-    private List<GameEventListener> eventListeners = new List<GameEventListener>();
+    protected List<GameEventListener> eventListeners = new List<GameEventListener>();
 
     public void RegisterListener(GameEventListener listener)
     {
@@ -27,22 +27,6 @@ public class GameEvent : ScriptableObject
         foreach (GameEventListener listener in eventListeners)
         {
             listener.OnEventRaise();
-        }
-    }
-
-    public void Raise(Vector2 data)
-    {
-        foreach (GameEventListener listener in eventListeners)
-        {
-            listener.OnEventRaise(data);
-        }
-    }
-
-    public void Raise(Vector3 data)
-    {
-        foreach (GameEventListener listener in eventListeners)
-        {
-            listener.OnEventRaise(data);
         }
     }
 }
