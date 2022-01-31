@@ -23,7 +23,8 @@ public class SandwichRandomLevelGenerator : SandwichGameLevelGenerator
         ingredientsGridData[position.x, position.y] = sandwichData.breadIngredient;
         avaibleExpandingPositions.Add(position);
 
-        position = GetNextPosition(ingredientsGridData, gridSize, avaibleExpandingPositions);
+        Vector2Int startPosition = position;
+        GetNextPosition(ingredientsGridData, gridSize, startPosition, out position);
         ingredientsGridData[position.x, position.y] = sandwichData.breadIngredient;
         avaibleExpandingPositions.Add(position);
 
@@ -32,13 +33,23 @@ public class SandwichRandomLevelGenerator : SandwichGameLevelGenerator
             ? Random.Range(minAdditiveIngredients, maxAdditiveIngredients + 1)
             : minAdditiveIngredients;
 
+        int startPositionIndex, ingredientIndex;
         int addedIngredients = 0;
+
         while ((addedIngredients < ingretdientsNum) && (avaibleIngredients.Count > 0) && (avaibleExpandingPositions.Count > 0))
         {
-            position = GetNextPosition(ingredientsGridData, gridSize, avaibleExpandingPositions);
+            startPositionIndex = Random.Range(0, avaibleExpandingPositions.Count);
+            startPosition = avaibleExpandingPositions[startPositionIndex];
+
+            if (!GetNextPosition(ingredientsGridData, gridSize, startPosition, out position))
+            {
+                avaibleExpandingPositions.RemoveAt(startPositionIndex);
+                continue;
+            }
+
             avaibleExpandingPositions.Add(position);
 
-            int ingredientIndex = Random.Range(0, avaibleIngredients.Count);
+            ingredientIndex = Random.Range(0, avaibleIngredients.Count);
             ingredientsGridData[position.x, position.y] = avaibleIngredients[ingredientIndex];
             avaibleIngredients.RemoveAt(ingredientIndex);
 
@@ -67,28 +78,27 @@ public class SandwichRandomLevelGenerator : SandwichGameLevelGenerator
         return result;
     }
 
-    private Vector2Int GetNextPosition(SandwichIngredientData[,] ingredientsGridData, int gridSize, List<Vector2Int> avaibleNextStartPositions)
+    private bool GetNextPosition(SandwichIngredientData[,] ingredientsGridData, int gridSize, Vector2Int startPosition, out Vector2Int result)
     {
-        int nextPosIndex = Random.Range(0, avaibleNextStartPositions.Count);
-        Vector2Int nextStartPos = avaibleNextStartPositions[nextPosIndex];
-
         int directionIndex = Random.Range(0, 4);
         Vector2Int direction = DIRECTIONS[directionIndex];
-        Vector2Int nextPosition = nextStartPos + direction;
+        result = startPosition + direction;
 
         int tries = 0;
-        while (!CheckPositionAvaibility(nextPosition, ingredientsGridData, gridSize))
+        while (!CheckPositionAvaibility(result, ingredientsGridData, gridSize))
         {
             directionIndex = (directionIndex + 1) % 4;
             direction = DIRECTIONS[directionIndex];
-            nextPosition = nextStartPos + direction;
+            result = startPosition + direction;
 
             tries++;
             if (tries >= 4)
-                break;
+            {
+                return false;
+            }
         }
 
-        return nextPosition;
+        return true;
     }
 
     private bool CheckPositionAvaibility(Vector2Int position, SandwichIngredientData[,] ingredientsGridData, int gridSize)
