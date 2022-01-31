@@ -5,6 +5,9 @@ public class InputManager : MonoBehaviour
     public GameVector2Event touchEvent;
     public GameVector2Event swipeEvent;
 
+    [Space()]
+    public bool exitOnBackButton = true;
+
     private Touch touch;
     private Vector2 touchStartPosition;
     private Vector2 touchEndPosition;
@@ -35,6 +38,11 @@ public class InputManager : MonoBehaviour
             OnTouchEnd(Input.mousePosition);
         }
 #endif
+
+        if (exitOnBackButton && Input.GetKeyDown(KeyCode.Escape)) 
+        { 
+            Application.Quit(); 
+        }
     }
 
     private void OnTouchStart(Vector2 touchPosition)
